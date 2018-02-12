@@ -24,15 +24,21 @@ public class FollowCamera : MonoBehaviour {
 		//To orient the camera behind the target, 
 		//we first need to get the angle of the target and 
 		//turn it into a rotation 
-		float currentAngle = transform.eulerAngles.y;
-		float desiredAngle = target.transform.eulerAngles.y;
+		float currentYAngle = transform.eulerAngles.y;
+		float desiredYAngle = target.transform.eulerAngles.y;
+
+		float currentXAngle = transform.eulerAngles.x;
+		float desiredXAngle = target.transform.eulerAngles.x;
 
 		//Instead of lerping between two points like we did with the Dungeon camera, 
 		//we'll be lerping between the angle of the camera and the angle of the 
 		//target. So, rather than Vector3.Lerp(), 
 		//we use the Mathf.LerpAngle() method. 
-		float angle = Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * damping);
-		Quaternion rotation = Quaternion.Euler(0, angle, 0);
+		float yAngle = Mathf.LerpAngle(currentYAngle, desiredYAngle, Time.deltaTime * damping);
+		//float xAngle = Mathf.LerpAngle(currentXAngle, desiredXAngle, Time.deltaTime * damping);
+		// Quaternion rotation = Quaternion.Euler(xAngle, yAngle, 0); NOO
+
+		Quaternion rotation = Quaternion.Euler(0, yAngle, 0);
 
 		//We can then multiply the offset by the rotation to 
 		//orient the offset the same as the target. 
